@@ -1,0 +1,70 @@
+.node-detail {
+    position: absolute;
+    bottom: 0;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    width: calc(100vw - 3rem);
+    max-width: 400px;
+    align-items: center;
+    overflow-x: hidden;
+    margin: 1rem;
+    padding: 0.5rem;
+    border-radius: 0.4rem;
+    font-family: Arial, Helvetica, sans-serif;
+    color: #FFFFFF;
+    background-color: #4d4d4ddc;
+    backdrop-filter: blur(4px);
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+.node-detail-imgs {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.node-detail-imgs > div {
+    width: 1.2rem;
+    height: 1.2rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0.5rem;
+    padding: 0.5rem;
+    border-radius: 0.4rem;
+    background-color: #747474;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+.node-detail-img {
+    /* width: 60%; */
+    width: 14rem;
+    min-width: 14rem;
+    aspect-ratio: 1 / 1;
+    margin: 0.2rem;
+}
+
+.node-detail-item {
+    margin: 0.2rem;
+    text-align: center;
+}
+
+.node-detail-name {
+    font-weight: bold;
+}
+
+.node-detail-username {
+    color: #c9c9c9;
+    font-size: 0.8em;
+}
+
+.node-detail-link {
+    color: #b7b7b7;
+}
