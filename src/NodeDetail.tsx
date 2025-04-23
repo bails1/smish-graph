@@ -13,18 +13,30 @@ function UserPhotos({ images }: UserPhotosProps) {
   const [imgIndex, setImgIndex] = useState(0)
 
   return (
-    <div className="node-detail-imgs">
+    <div className="node-detail-img">
       {(images.length > 1) &&
         <div onClick={() => setImgIndex((imgIndex - 1 + images.length) % images.length)}>
           &#8249;
         </div>
       }
-      <img className="node-detail-img" src={images[imgIndex].src} alt={images[imgIndex].alt} />
+      <img className="node-detail-user-img" src={images[imgIndex].src} alt={images[imgIndex].alt} />
       {(images.length > 1) &&
         <div onClick={() => setImgIndex((imgIndex + 1) % images.length)}>
           &#8250;
         </div>
       }
+    </div>
+  )
+}
+
+type PagePhotoProps = {
+  scanId: string
+}
+
+function PagePhoto({ scanId }: PagePhotoProps) {
+  return (
+    <div className="node-detail-img">
+      <img className="node-detail-page-img" src={`https://urlscan.io/screenshots/${scanId}.png`} alt="Screenshot" />
     </div>
   )
 }
@@ -42,8 +54,9 @@ function NodeDetail({ node }: NodeDetailProps) {
   return (
     <div className="node-detail">
       {node.type === 'user' && node.data.photos.length > 0 &&
-        <UserPhotos images={node.data.photos.map(p => ({ src: `${import.meta.env.BASE_URL}photos/${p.path}` }))} key={node.id} />
+        <UserPhotos images={node.data.photos.map(p => ({ src: `${import.meta.env.BASE_URL}photos/${p.path}`, alt: 'User photo' }))} key={node.id} />
       }
+      {node.type === 'page' && <PagePhoto scanId={node.data.scanId} key={node.id} />}
       {(node.type === 'user' || node.type === 'bot') &&
         <>
           <div className="node-detail-item node-detail-name">{node.data.firstName + (node.data.lastName ? ` ${node.data.lastName}` : '')}</div>
