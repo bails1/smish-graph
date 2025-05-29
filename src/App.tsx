@@ -1,16 +1,21 @@
 import { useCallback, useEffect, useRef, useState } from 'react'
-import ForceGraph2D, { ForceGraphMethods, NodeObject, LinkObject } from 'react-force-graph-2d'
-import Key from './Key'
-import NodeDetail from './NodeDetail'
+import ForceGraph2D, { ForceGraphMethods, LinkObject, NodeObject } from 'react-force-graph-2d'
+import Key from './components/Key/Key'
+import NodeDetail from './components/NodeDetail/NodeDetail'
+import Timestamp from './components/Timestamp/Timestamp'
 import { GraphData, GraphNode } from './types/common'
 
 function App() {
   const fgRef = useRef<ForceGraphMethods<NodeObject<GraphNode>, LinkObject<GraphNode, { source: number; target: number; }>> | undefined>(undefined)
+  const [timestamp, setTimestamp] = useState<number | null>(null)
   const [data, setData] = useState<GraphData>({ nodes: [], links: [] })
   const [selectedNode, setSelectedNode] = useState<GraphNode | null>(null)
 
   useEffect(() => {
-    fetch(`${import.meta.env.BASE_URL}data.json`).then(res => res.json()).then(data => setData(data))
+    fetch(`${import.meta.env.BASE_URL}data.json`).then(res => res.json()).then(data => {
+      setTimestamp(data.updated)
+      setData(data.data)
+    })
   }, [])
 
   const handleClick = useCallback((node: NodeObject<NodeObject<GraphNode>>) => {
@@ -21,6 +26,7 @@ function App() {
   return (
     <>
       <Key />
+      {timestamp && <Timestamp timestamp={timestamp} />}
       {selectedNode && <NodeDetail node={selectedNode} />}
       <ForceGraph2D
         ref={fgRef}

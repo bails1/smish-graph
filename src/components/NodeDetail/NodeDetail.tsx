@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import './NodeDetail.css'
-import { GraphNode } from './types/common'
+import { GraphNode } from '../../types/common'
 
 type UserPhotosProps = {
   images: {

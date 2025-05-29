@@ -1,54 +1,27 @@
-# React + TypeScript + Vite
+# Phishing Attribution Graph
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A simple, interactive graph built using React that visualizes the relationship between phishing sites and associated Telegram users.
 
-Currently, two official plugins are available:
+Individual nodes can be selected to view additional details including profile photos, names, usernames, screenshots, and phishing URLs.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+See a live [demo](https://bails.dev/graph/) of the graph in action, or read the [technical write-up](https://bails.dev/posts/fi-phishing-attribution/) to see how this data was obtained.
 
-## Expanding the ESLint configuration
+![Sample graph](graph.png)
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+## Getting Started
 
-```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
+### Development
+
+Update `public/data.json` with the desired graph data and remove the sample profile photos (`public/photos/`). Start the develpment server.
+
+```sh
+npm run dev
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+### Deploying
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+When building for production, the base URL must be specified if it will not be hosted at `/`. Replace `data.json` and `photos/` with the appropriate data.
 
-export default tseslint.config({
-  plugins: {
-    // Add the react-x and react-dom plugins
-    'react-x': reactX,
-    'react-dom': reactDom,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended typescript rules
-    ...reactX.configs['recommended-typescript'].rules,
-    ...reactDom.configs.recommended.rules,
-  },
-})
+```sh
+npm run build -- --base="/graph/"
 ```
