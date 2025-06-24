@@ -75,7 +75,7 @@ function NodeDetail({ node }: NodeDetailProps) {
         <>
           <div className="node-detail-item">{node.data.url}</div>
           <div className="node-detail-item">{getTimeStr(node.data.time)}</div>
-          <a className="node-detail-item node-detail-link" href={`https://urlscan.io/result/${node.data.scanId}/`} target="_blank">More details</a>
+          <a className="node-detail-item link" href={`https://urlscan.io/result/${node.data.scanId}/`} target="_blank">More details</a>
         </>
       }
       {node.type === 'token' &&

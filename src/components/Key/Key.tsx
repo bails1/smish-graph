@@ -3,6 +3,8 @@ import './Key.css'
 function Key() {
   return (
     <div className="key">
+      <div className='title'>FI Phishing Attribution</div>
+      <a href='/posts/fi-phishing-attribution/' className='link'>View technical analysis</a>
       <div className="key-item">
         <span className="dot dot-page"></span>
         Phishing page
